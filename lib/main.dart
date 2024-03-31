@@ -7,6 +7,8 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // 로그아웃 작업을 진행해볼까~~~~
+  // 호로로루룰
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
