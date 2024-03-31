@@ -3,7 +3,8 @@
 A new Flutter project.
 새 브랜치 생성
 
-새로 리모트에서 작업한 내용
+~새로 리모트에서 작업한 내용~  
+리모트 작업 내용 수정
 
 ## Getting Started
 
