@@ -18,12 +18,12 @@ class SearchViewModel with ChangeNotifier {
 
   List<Food> get filteredFoodList => _filteredFoodList;
 
-  Future<void> _getFoodList() async {
+  Future<void> _setAllFoodList() async {
     _foodList = await _foodRepository.getFoodList();
   }
 
   void onSearchFood(String name) async {
-    await _getFoodList();
+    await _setAllFoodList();
 
     _filteredFoodList = _foodList.where((e) {
       return e.foodName.toLowerCase().contains(name.toLowerCase()) ||
@@ -31,5 +31,9 @@ class SearchViewModel with ChangeNotifier {
     }).toList();
     print(_filteredFoodList.length);
     notifyListeners();
+  }
+
+  void resultList() {
+
   }
 }

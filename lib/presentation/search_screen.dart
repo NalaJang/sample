@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:search_ex/presentation/components/search_widget.dart';
 import 'package:search_ex/presentation/viewModel/search_view_model.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -28,11 +30,10 @@ class SearchScreen extends StatelessWidget {
                 ),
               ),
             ),
-            TextButton(
-              onPressed: (){
-                viewModel.onSearchFood('난타');
-              },
-              child: Text('button'),
+            Expanded(
+              child: ListView(
+                children: viewModel.filteredFoodList.map((food) => SearchWidget(food: food)).toList(),
+              ),
             ),
           ],
         ),
