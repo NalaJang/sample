@@ -4,12 +4,14 @@ import 'package:search_ex/model/food.dart';
 class Search extends SearchDelegate {
   String selectedResult = '';
   int selectedIndex = 0;
-  final List<String> _addList = [];
-  final List<Food> foodData;
+  final List<Food> _foodData;
+  List<String> suggestionList = [];
+  final List<String> _savedList = [];
+  final List<String> _recentList = [];
 
-  Search(this.foodData);
+  Search(this._foodData);
 
-  List<String> get addList => _addList;
+  List<String> get savedList => _savedList;
 
 
   @override
@@ -19,8 +21,10 @@ class Search extends SearchDelegate {
       IconButton(
         onPressed: () {
           query = '';
+          suggestionList.clear();
+          print(suggestionList.length);
         },
-        icon: Icon(Icons.close),
+        icon: const Icon(Icons.close),
       )
     ];
   }
@@ -32,36 +36,33 @@ class Search extends SearchDelegate {
       onPressed: () {
         Navigator.pop(context);
       },
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
     );
   }
 
   @override
   Widget buildResults(BuildContext context) {
     // showResult() 함수가 호출될 때 검색 결과를 보여준다.
-    return Container(
-      child: Center(
-        child: Column(
-          children: [
-            _result(selectedIndex),
-          ],
-        ),
+    return Center(
+      child: Column(
+        children: [
+          _result(selectedIndex),
+        ],
       ),
     );
   }
 
-  List<String> recentList = ['text4', 'text3'];
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final makerNames = foodData.map((e) => e.makerName).toList();
-
-    List<String> suggestionList = [];
+    final makerNames = _foodData.map((e) => e.makerName).toList();
+    print('maker: $makerNames');
+    suggestionList = [];
     query.isEmpty
-        ? suggestionList = recentList
+        ? suggestionList = _recentList
         : suggestionList
-            // .addAll(listExample.where((element) => element.contains(query)));
-            .addAll(makerNames.where((element) => element.contains(query)));
+    // .addAll(listExample.where((element) => element.contains(query)));
+        .addAll(makerNames.where((element) => element.contains(query)));
 
     // return Column(
     //   children: listExample.map((food) => SearchWidget(food: food)).toList(),
@@ -81,6 +82,7 @@ class Search extends SearchDelegate {
             suggestionList.add(selectedResult);
             selectedResult = suggestionList[index];
             selectedIndex = index;
+            _recentList.add(makerNames[index]);
             showResults(context);
           },
         );
@@ -89,9 +91,9 @@ class Search extends SearchDelegate {
   }
 
   Widget _result(int index) {
-    String carbon = foodData[index].carbon; // 탄수화물
-    String protein = foodData[index].protein; // 단백질
-    String fat = foodData[index].saturatedFat; // 지방
+    String carbon = _foodData[index].carbon; // 탄수화물
+    String protein = _foodData[index].protein; // 단백질
+    String fat = _foodData[index].saturatedFat; // 지방
 
     return Column(
       children: [
@@ -108,9 +110,9 @@ class Search extends SearchDelegate {
         // Spacer(),
         ElevatedButton(
           onPressed: (){
-            query = '';
-            _addList.add(selectedResult);
-            print(_addList.length);
+
+            _savedList.add(selectedResult);
+            print(_savedList.length);
           },
           child: Text('추가하기'),
         ),

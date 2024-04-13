@@ -1,35 +1,32 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:search_ex/presentation/viewModel/search_view_model.dart';
-import 'package:search_ex/presentation/search.dart';
+import 'package:provider/provider.dart';
+import 'package:search_ex/presentation/search_screen.dart';
+import 'package:search_ex/presentation/viewModel/home_view_model.dart';
 
 class MyHome extends StatelessWidget {
-  final SearchViewModel searchViewModel;
-
-  const MyHome({
-    super.key,
-    required this.searchViewModel,
-  });
+  const MyHome({super.key});
 
   @override
   Widget build(BuildContext context) {
     final List<String> list = List.generate(10, (index) => 'text$index');
+    final searchViewModel = context.watch<HomeViewModel>();
 
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () async {
-              searchViewModel.pressSearchButton();
+        title: const Text('Home'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await searchViewModel.getFoodList();
 
-              await showSearch(
-                context: context,
-                delegate: Search(searchViewModel.foodList),
-              );
-            },
-            icon: const Icon(Icons.search),
-          )
-        ],
-        title: const Text('Search Bar'),
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SearchScreen()),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
       body: ListView.builder(
         itemCount: list.length,
