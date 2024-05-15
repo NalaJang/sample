@@ -7,10 +7,12 @@ import 'package:search_ex/model/food.dart';
 
 class SearchWidget extends StatelessWidget {
   final Food food;
+  final MySharedPreferences preferences;
 
   const SearchWidget({
     super.key,
     required this.food,
+    required this.preferences,
   });
 
   @override
@@ -58,7 +60,7 @@ class SearchWidget extends StatelessWidget {
               String key = food.foodName;
               String value = jsonEncode(selectedFood.toJson());
               // DB 에 저장
-              final result = await prefs.setString(key, value);
+              final result = await preferences.setString(key, value);
               if (result) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('저장되었습니다.')),

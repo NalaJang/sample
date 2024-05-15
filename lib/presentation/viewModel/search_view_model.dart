@@ -1,20 +1,26 @@
 import 'package:flutter/cupertino.dart';
+import 'package:search_ex/data_source/db.dart';
 import 'package:search_ex/model/food.dart';
 import 'package:search_ex/repository/food_repository.dart';
 
 class SearchViewModel with ChangeNotifier {
   final _queryTextEditingController = TextEditingController();
   final FoodRepository _foodRepository;
+  final MySharedPreferences _preferences;
   List<Food> _foodList = [];
   List<Food> _filteredFoodList = [];
 
   SearchViewModel({
     required FoodRepository foodRepository,
-  }) : _foodRepository = foodRepository;
+    required MySharedPreferences preferences,
+  })  : _foodRepository = foodRepository,
+        _preferences = preferences;
 
   get queryTextEditingController => _queryTextEditingController;
 
   FoodRepository get foodRepository => _foodRepository;
+
+  MySharedPreferences get preferences => _preferences;
 
   List<Food> get foodList => List.unmodifiable(_foodList);
 

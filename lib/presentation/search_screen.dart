@@ -35,7 +35,10 @@ class SearchScreen extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: viewModel.filteredFoodList
-                    .map((food) => SearchWidget(food: food))
+                    .map((food) => SearchWidget(
+                          food: food,
+                          preferences: viewModel.preferences,
+                        ))
                     .toList(),
               ),
             ),
