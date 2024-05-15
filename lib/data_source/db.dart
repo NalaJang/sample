@@ -19,11 +19,11 @@ class MySharedPreferences {
     prefs = await SharedPreferences.getInstance();
   }
 
-  Future<void> setStringList(String key, List<String> value) async {
-    await prefs.setStringList(key, value);
+  Future<bool> setString(String key, String value) async {
+    return await prefs.setString(key, value);
   }
 
-  List<String>? getStringList(String key) {
-    return prefs.getStringList(key);
+  String? getString(String key) {
+    return prefs.getString(key);
   }
 }
