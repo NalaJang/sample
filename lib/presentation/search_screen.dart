@@ -14,23 +14,28 @@ class _SearchScreenState extends State<SearchScreen> {
   final _searchTextController = TextEditingController();
 
   @override
+  void dispose() {
+    _searchTextController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<SearchViewModel>();
     return Scaffold(
       appBar: AppBar(
         title: TextField(
-          controller: viewModel.queryTextEditingController,
-          decoration: InputDecoration(
+          controller: _searchTextController,
+          decoration: const InputDecoration(
             hintText: '검색어를 입력해 주세요.',
           ),
         ),
         actions: [
           IconButton(
             onPressed: () {
-              final query = viewModel.queryTextEditingController.text;
-              viewModel.onSearchFood(query);
+              viewModel.onSearchFood(_searchTextController.text);
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           ),
         ],
       ),

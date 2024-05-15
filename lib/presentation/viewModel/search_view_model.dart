@@ -4,7 +4,6 @@ import 'package:search_ex/model/food.dart';
 import 'package:search_ex/repository/food_repository.dart';
 
 class SearchViewModel with ChangeNotifier {
-  final _queryTextEditingController = TextEditingController();
   final FoodRepository _foodRepository;
   final MySharedPreferences _preferences;
   List<Food> _foodList = [];
@@ -16,8 +15,6 @@ class SearchViewModel with ChangeNotifier {
   })  : _foodRepository = foodRepository,
         _preferences = preferences;
 
-  get queryTextEditingController => _queryTextEditingController;
-
   FoodRepository get foodRepository => _foodRepository;
 
   MySharedPreferences get preferences => _preferences;
@@ -25,12 +22,6 @@ class SearchViewModel with ChangeNotifier {
   List<Food> get foodList => List.unmodifiable(_foodList);
 
   List<Food> get filteredFoodList => List.unmodifiable(_filteredFoodList);
-
-  @override
-  void dispose() {
-    _queryTextEditingController.dispose();
-    super.dispose();
-  }
 
   Future<void> _setAllFoodList() async {
     _foodList = await _foodRepository.getFoodList();
