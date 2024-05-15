@@ -1,56 +1,47 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_ex/data_source/food_api_impl.dart';
 import 'package:search_ex/presentation/components/search_widget.dart';
 import 'package:search_ex/presentation/viewModel/search_view_model.dart';
-import 'package:search_ex/repository/food_repo_impl.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => SearchViewModel(
-          foodRepository: FoodRepositoryImpl(foodApi: FoodApiImpl())),
-      builder: (context, child) {
-        final viewModel = context.watch<SearchViewModel>();
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text(''),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextField(
-                  controller: viewModel.queryTextEditingController,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    hintText: '검색어',
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.search),
-                      onPressed: () {
-                        final query = viewModel.queryTextEditingController.text;
-                        viewModel.onSearchFood(query);
-                      },
-                    ),
-                  ),
+    final viewModel = context.watch<SearchViewModel>();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(''),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: viewModel.queryTextEditingController,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                hintText: '검색어',
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    final query = viewModel.queryTextEditingController.text;
+                    viewModel.onSearchFood(query);
+                  },
                 ),
-                Expanded(
-                  child: ListView(
-                    children: viewModel.filteredFoodList
-                        .map((food) => SearchWidget(food: food))
-                        .toList(),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+            Expanded(
+              child: ListView(
+                children: viewModel.filteredFoodList
+                    .map((food) => SearchWidget(food: food))
+                    .toList(),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
