@@ -5,6 +5,7 @@ import 'package:search_ex/presentation/my_home.dart';
 import 'package:search_ex/presentation/viewModel/home_view_model.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   MySharedPreferences.getInstance();
   runApp(const MyApp());
 }
