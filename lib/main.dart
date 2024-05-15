@@ -7,9 +7,11 @@ import 'package:search_ex/presentation/viewModel/home_view_model.dart';
 import 'package:search_ex/presentation/viewModel/search_view_model.dart';
 import 'package:search_ex/repository/food_repo_impl.dart';
 
-void main() {
+late MySharedPreferences mySharedPreferences;
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MySharedPreferences.getInstance();
+  mySharedPreferences = await MySharedPreferences.getInstance();
   runApp(const MyApp());
 }
 
@@ -20,10 +22,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => HomeViewModel()),
+        ChangeNotifierProvider(create: (_) => HomeViewModel(preferences: mySharedPreferences)),
         ChangeNotifierProvider(
           create: (_) => SearchViewModel(
-            foodRepository: FoodRepositoryImpl(foodApi: FoodApiImpl()),
+            foodRepository: FoodRepositoryImpl(foodApi: FoodApiImpl()), preferences: mySharedPreferences,
           ),
         ),
       ],
