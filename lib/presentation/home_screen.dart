@@ -11,7 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -31,18 +30,36 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () async {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => const SearchScreen()),
+            MaterialPageRoute(builder: (context) => const SearchScreen()),
           );
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView.builder(
-        itemCount: viewModel.savedFoodList.length,
-        itemBuilder: (context, index) => ListTile(
-          title: Text(viewModel.savedFoodList[index].foodName),
-        ),
-      ),
+      body: switch (viewModel.status) {
+        HomeScreenStatus.waiting => const SizedBox(),
+        HomeScreenStatus.loading =>
+          const Center(child: CircularProgressIndicator()),
+        HomeScreenStatus.error => Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('다시 시도해 주세요.'),
+                IconButton(
+                  onPressed: () {
+                    return;
+                  },
+                  icon: const Icon(Icons.refresh_outlined),
+                ),
+              ],
+            ),
+          ),
+        HomeScreenStatus.success => ListView.builder(
+            itemCount: viewModel.savedFoodList.length,
+            itemBuilder: (context, index) => ListTile(
+              title: Text(viewModel.savedFoodList[index].foodName),
+            ),
+          ),
+      },
     );
   }
 }
