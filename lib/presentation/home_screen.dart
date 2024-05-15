@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:search_ex/presentation/search_screen.dart';
+import 'package:search_ex/presentation/viewModel/home_view_model.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() => context.read<HomeViewModel>().getAllSavedData());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final List<String> list = List.generate(10, (index) => 'text$index');
+    final viewModel = context.watch<HomeViewModel>();
 
     return Scaffold(
       appBar: AppBar(
@@ -23,9 +38,9 @@ class HomeScreen extends StatelessWidget {
         child: const Icon(Icons.add),
       ),
       body: ListView.builder(
-        itemCount: list.length,
+        itemCount: viewModel.savedFoodList.length,
         itemBuilder: (context, index) => ListTile(
-          title: Text(list[index]),
+          title: Text(viewModel.savedFoodList[index].foodName),
         ),
       ),
     );
