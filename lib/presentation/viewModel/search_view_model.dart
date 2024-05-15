@@ -41,5 +41,8 @@ class SearchViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void clearList() {
+    _filteredFoodList.clear();
+  }
   void resultList() {}
 }

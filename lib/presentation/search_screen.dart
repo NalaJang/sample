@@ -25,10 +25,18 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(
         title: TextField(
+          autofocus: true,
           controller: _searchTextController,
           decoration: const InputDecoration(
             hintText: '검색어를 입력해 주세요.',
           ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            viewModel.clearList();
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
         ),
         actions: [
           IconButton(
