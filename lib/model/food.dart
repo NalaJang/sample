@@ -24,4 +24,36 @@ class Food {
     required this.saturatedFat,
     required this.transFat,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'foodName': foodName,
+      'makerName': makerName,
+      'servingsize': servingsize,
+      'servingunit': servingunit,
+      'calories': calories,
+      'carbon': carbon,
+      'sugars': sugars,
+      'protein': protein,
+      'sodium': sodium,
+      'saturatedFat': saturatedFat,
+      'transFat': transFat,
+    };
+  }
+
+  factory Food.fromJson(Map<String, dynamic> map) {
+    return Food(
+      foodName: map['foodName'] as String,
+      makerName: map['makerName'] as String,
+      servingsize: map['servingsize'] as String,
+      servingunit: map['servingunit'] as String,
+      calories: map['calories'] as String,
+      carbon: map['carbon'] as String,
+      sugars: map['sugars'] as String,
+      protein: map['protein'] as String,
+      sodium: map['sodium'] as String,
+      saturatedFat: map['saturatedFat'] as String,
+      transFat: map['transFat'] as String,
+    );
+  }
 }
