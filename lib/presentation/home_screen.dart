@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:search_ex/design/color_style.dart';
@@ -56,31 +57,36 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-        HomeScreenStatus.success => Column(
-            children: [
-              _tags(viewModel),
-              const SizedBox(height: 12),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: viewModel.savedFoodList.length,
-                  itemBuilder: (context, index) {
-                    viewModel.getFilterStatus();
+        HomeScreenStatus.success => SizedBox(
+          width: double.infinity,
+          child: Column(
+              children: [
+                _tags(viewModel),
+                const SizedBox(height: 12),
+                viewModel.savedFoodList.isEmpty ?
+                    const Text('저장된 데이터가 없습니다.')
+                : Expanded(
+                  child: ListView.builder(
+                    itemCount: viewModel.savedFoodList.length,
+                    itemBuilder: (context, index) {
+                      viewModel.getFilterStatus();
 
-                    return ListTile(
-                      title: Text(viewModel.savedFoodList[index].foodName),
-                      subtitle: Row(
-                        children: [
-                          Text('탄수화물 ${viewModel.savedFoodList[index].carbon}'),
-                          Text('단백질 ${viewModel.savedFoodList[index].protein}'),
-                          Text('지방 ${viewModel.savedFoodList[index].saturatedFat}'),
-                        ],
-                      ),
-                    );
-                  },
+                      return ListTile(
+                        title: Text(viewModel.savedFoodList[index].foodName),
+                        subtitle: Row(
+                          children: [
+                            Text('탄수화물 ${viewModel.savedFoodList[index].carbon}'),
+                            Text('단백질 ${viewModel.savedFoodList[index].protein}'),
+                            Text('지방 ${viewModel.savedFoodList[index].saturatedFat}'),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+        ),
       },
     );
   }
