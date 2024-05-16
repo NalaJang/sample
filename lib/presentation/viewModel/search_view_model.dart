@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:search_ex/data/data_source/db.dart';
+import 'package:search_ex/data/db/db.dart';
 import 'package:search_ex/data/model/food.dart';
 import 'package:search_ex/data/repository/food_repository.dart';
 

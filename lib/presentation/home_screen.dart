@@ -78,18 +78,36 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, index) {
                             viewModel.getFilterStatus();
 
-                            return ListTile(
-                              title:
-                                  Text(viewModel.savedFoodList[index].foodName),
-                              subtitle: Row(
-                                children: [
-                                  Text(
-                                      '탄수화물 ${viewModel.savedFoodList[index].carbon}'),
-                                  Text(
-                                      '단백질 ${viewModel.savedFoodList[index].protein}'),
-                                  Text(
-                                      '지방 ${viewModel.savedFoodList[index].saturatedFat}'),
-                                ],
+                            return Dismissible(
+                              key: UniqueKey(),
+                              background: Container(
+                                padding: const EdgeInsets.only(right: 40),
+                                alignment: Alignment.centerRight,
+                                decoration: const BoxDecoration(
+                                  color: AppColors.red,
+                                ),
+                                child: const Icon(
+                                  Icons.delete_outlined,
+                                  color: AppColors.white,
+                                ),
+                              ),
+                              onDismissed: (direction) {
+                                print('direction ::: $direction');
+
+                              },
+                              child: ListTile(
+                                title: Text(
+                                    viewModel.savedFoodList[index].foodName),
+                                subtitle: Row(
+                                  children: [
+                                    Text(
+                                        '탄수화물 ${viewModel.savedFoodList[index].carbon}'),
+                                    Text(
+                                        '단백질 ${viewModel.savedFoodList[index].protein}'),
+                                    Text(
+                                        '지방 ${viewModel.savedFoodList[index].saturatedFat}'),
+                                  ],
+                                ),
                               ),
                             );
                           },

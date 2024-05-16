@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_ex/data/data_source/db.dart';
+import 'package:search_ex/data/db/db.dart';
 import 'package:search_ex/data/data_source/food_api_impl.dart';
 import 'package:search_ex/data/repository/food_repo_impl.dart';
 import 'package:search_ex/presentation/home_screen.dart';
