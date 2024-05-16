@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:search_ex/design/color_style.dart';
@@ -13,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int listLength = 0;
   int selectedTag = 0;
 
   @override
@@ -25,17 +25,23 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<HomeViewModel>();
+    listLength = viewModel.savedFoodList.length;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
+        onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const SearchScreen()),
           );
+
+          // 갱신
+          setState(() {
+            viewModel.getAllSavedData();
+          });
         },
         child: const Icon(Icons.add),
       ),
@@ -58,35 +64,39 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         HomeScreenStatus.success => SizedBox(
-          width: double.infinity,
-          child: Column(
+            width: double.infinity,
+            child: Column(
               children: [
                 _tags(viewModel),
                 const SizedBox(height: 12),
-                viewModel.savedFoodList.isEmpty ?
-                    const Text('저장된 데이터가 없습니다.')
-                : Expanded(
-                  child: ListView.builder(
-                    itemCount: viewModel.savedFoodList.length,
-                    itemBuilder: (context, index) {
-                      viewModel.getFilterStatus();
+                viewModel.savedFoodList.isEmpty
+                    ? const Text('저장된 데이터가 없습니다.')
+                    : Expanded(
+                        child: ListView.builder(
+                          itemCount: viewModel.savedFoodList.length,
+                          itemBuilder: (context, index) {
+                            viewModel.getFilterStatus();
 
-                      return ListTile(
-                        title: Text(viewModel.savedFoodList[index].foodName),
-                        subtitle: Row(
-                          children: [
-                            Text('탄수화물 ${viewModel.savedFoodList[index].carbon}'),
-                            Text('단백질 ${viewModel.savedFoodList[index].protein}'),
-                            Text('지방 ${viewModel.savedFoodList[index].saturatedFat}'),
-                          ],
+                            return ListTile(
+                              title:
+                                  Text(viewModel.savedFoodList[index].foodName),
+                              subtitle: Row(
+                                children: [
+                                  Text(
+                                      '탄수화물 ${viewModel.savedFoodList[index].carbon}'),
+                                  Text(
+                                      '단백질 ${viewModel.savedFoodList[index].protein}'),
+                                  Text(
+                                      '지방 ${viewModel.savedFoodList[index].saturatedFat}'),
+                                ],
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                ),
+                      ),
               ],
             ),
-        ),
+          ),
       },
     );
   }

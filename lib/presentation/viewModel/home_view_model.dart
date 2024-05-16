@@ -33,6 +33,7 @@ class HomeViewModel with ChangeNotifier {
 
   void getAllSavedData() {
     _status = HomeScreenStatus.loading;
+    _savedFoodList.clear();
     notifyListeners();
 
     try {
