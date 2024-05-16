@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:search_ex/core/enum/home_screen_status.dart';
 import 'package:search_ex/design/color_style.dart';
 import 'package:search_ex/presentation/search_screen.dart';
 import 'package:search_ex/presentation/viewModel/home_view_model.dart';
