@@ -22,49 +22,52 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<SearchViewModel>();
-    return Scaffold(
-      appBar: AppBar(
-        title: TextField(
-          autofocus: true,
-          controller: _searchTextController,
-          decoration: const InputDecoration(
-            hintText: '검색어를 입력해 주세요.',
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: TextField(
+            autofocus: true,
+            controller: _searchTextController,
+            decoration: const InputDecoration(
+              hintText: '검색어를 입력해 주세요.',
+            ),
           ),
-        ),
-        leading: IconButton(
-          onPressed: () {
-            viewModel.clearList();
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.arrow_back),
-        ),
-        actions: [
-          IconButton(
+          leading: IconButton(
             onPressed: () {
-              viewModel.onSearchFood(_searchTextController.text);
+              viewModel.clearList();
+              Navigator.pop(context);
             },
-            icon: const Icon(Icons.search),
+            icon: const Icon(Icons.arrow_back),
           ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 20, 10, 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: ListView(
-                children: viewModel.filteredFoodList
-                    .map(
-                      (food) => SearchWidget(
-                        food: food,
-                        preferences: viewModel.preferences,
-                      ),
-                    )
-                    .toList(),
-              ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                viewModel.onSearchFood(_searchTextController.text);
+              },
+              icon: const Icon(Icons.search),
             ),
           ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 20, 10, 30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: ListView(
+                  children: viewModel.filteredFoodList
+                      .map(
+                        (food) => SearchWidget(
+                          food: food,
+                          preferences: viewModel.preferences,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
