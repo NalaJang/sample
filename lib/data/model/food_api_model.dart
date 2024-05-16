@@ -1,4 +1,4 @@
-import 'package:search_ex/dto/food_dto.dart';
+import 'package:search_ex/data/dto/food_dto.dart';
 
 class FoodApiModel {
   final ServiceIdDto i2790;

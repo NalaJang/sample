@@ -1,7 +1,7 @@
-import 'package:search_ex/data_source/food_api_impl.dart';
-import 'package:search_ex/mapper/food_mapper.dart';
-import 'package:search_ex/model/food.dart';
-import 'package:search_ex/repository/food_repository.dart';
+import 'package:search_ex/data/data_source/food_api_impl.dart';
+import 'package:search_ex/data/mapper/food_mapper.dart';
+import 'package:search_ex/data/model/food.dart';
+import 'package:search_ex/data/repository/food_repository.dart';
 
 class FoodRepositoryImpl implements FoodRepository {
   final FoodApiImpl _foodApi;

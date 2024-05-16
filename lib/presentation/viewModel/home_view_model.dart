@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:search_ex/core/enum/filter.dart';
 import 'package:search_ex/core/enum/home_screen_status.dart';
-import 'package:search_ex/data_source/db.dart';
-import 'package:search_ex/model/food.dart';
+import 'package:search_ex/data/data_source/db.dart';
+import 'package:search_ex/data/model/food.dart';
 
 class HomeViewModel with ChangeNotifier {
   final MySharedPreferences _preferences;

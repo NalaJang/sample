@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:search_ex/data_source/db.dart';
-import 'package:search_ex/model/food.dart';
-import 'package:search_ex/repository/food_repository.dart';
+import 'package:search_ex/data/data_source/db.dart';
+import 'package:search_ex/data/model/food.dart';
+import 'package:search_ex/data/repository/food_repository.dart';
 
 class SearchViewModel with ChangeNotifier {
   final FoodRepository _foodRepository;
@@ -44,5 +44,6 @@ class SearchViewModel with ChangeNotifier {
   void clearList() {
     _filteredFoodList.clear();
   }
+
   void resultList() {}
 }

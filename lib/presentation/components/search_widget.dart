@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:search_ex/data_source/db.dart';
-import 'package:search_ex/model/food.dart';
+import 'package:search_ex/data/data_source/db.dart';
+import 'package:search_ex/data/model/food.dart';
 
 class SearchWidget extends StatelessWidget {
   final Food food;

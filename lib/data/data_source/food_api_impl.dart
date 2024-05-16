@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:search_ex/data_source/food_api.dart';
+import 'package:search_ex/data/data_source/food_api.dart';
 import 'package:http/http.dart' as http;
-import 'package:search_ex/dto/food_dto.dart';
+import 'package:search_ex/data/dto/food_dto.dart';
 
 class FoodApiImpl implements FoodApi {
   String uri =

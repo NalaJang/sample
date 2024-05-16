@@ -1,6 +1,6 @@
-import 'package:search_ex/dto/food_dto.dart';
-import 'package:search_ex/model/food.dart';
-import 'package:search_ex/model/service_id.dart';
+import 'package:search_ex/data/dto/food_dto.dart';
+import 'package:search_ex/data/model/food.dart';
+import 'package:search_ex/data/model/service_id.dart';
 
 extension FoodMapper on FoodDto {
   Food toFood() {
@@ -22,7 +22,8 @@ extension FoodMapper on FoodDto {
 
 extension ServiceIdMapper on ServiceIdDto {
   ServiceId toServiceId() {
-    return ServiceId(row: row?.map((e) => e.toFood()).toList() ?? [],
+    return ServiceId(
+      row: row?.map((e) => e.toFood()).toList() ?? [],
     );
   }
 }
