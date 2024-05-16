@@ -58,14 +58,25 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         HomeScreenStatus.success => Column(
             children: [
-              _tags(),
+              _tags(viewModel),
               const SizedBox(height: 12),
               Expanded(
                 child: ListView.builder(
                   itemCount: viewModel.savedFoodList.length,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(viewModel.savedFoodList[index].foodName),
-                  ),
+                  itemBuilder: (context, index) {
+                    viewModel.getFilterStatus();
+
+                    return ListTile(
+                      title: Text(viewModel.savedFoodList[index].foodName),
+                      subtitle: Row(
+                        children: [
+                          Text('탄수화물 ${viewModel.savedFoodList[index].carbon}'),
+                          Text('단백질 ${viewModel.savedFoodList[index].protein}'),
+                          Text('지방 ${viewModel.savedFoodList[index].transFat}'),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
@@ -74,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _tags() {
+  Widget _tags(HomeViewModel viewModel) {
     return SizedBox(
       height: 35,
       child: ListView(
@@ -93,21 +104,23 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {
                 setState(() {
                   selectedTag = index;
+                  viewModel.setFilterStatus(filter: item.data!);
                 });
               },
               child: Container(
                 padding: const EdgeInsets.fromLTRB(7, 5, 7, 5),
                 margin: const EdgeInsets.symmetric(horizontal: 7),
                 decoration: BoxDecoration(
+                  color: selectedTag == index
+                      ? AppColors.purple2
+                      : AppColors.white,
+                  border: Border.all(
                     color: selectedTag == index
                         ? AppColors.purple2
-                        : AppColors.white,
-                    border: Border.all(
-                      color: selectedTag == index
-                          ? AppColors.purple2
-                          : AppColors.black,
-                    ),
-                    borderRadius: BorderRadius.circular(12),),
+                        : AppColors.black,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 child: Text(
                   item.data!,
                   style: selectedTag == index
