@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text('탄수화물 ${viewModel.savedFoodList[index].carbon}'),
                           Text('단백질 ${viewModel.savedFoodList[index].protein}'),
-                          Text('지방 ${viewModel.savedFoodList[index].transFat}'),
+                          Text('지방 ${viewModel.savedFoodList[index].saturatedFat}'),
                         ],
                       ),
                     );

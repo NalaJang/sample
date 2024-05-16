@@ -56,7 +56,7 @@ class HomeViewModel with ChangeNotifier {
       case '전체' : _filterStatus = FilterStatus.all;
       case '탄수화물' : _filterStatus = FilterStatus.carbon;
       case '단백질' : _filterStatus = FilterStatus.protein;
-      case '지방' : _filterStatus = FilterStatus.transFat;
+      case '지방' : _filterStatus = FilterStatus.saturatedFat;
     }
   }
 
@@ -68,8 +68,8 @@ class HomeViewModel with ChangeNotifier {
         _savedFoodList.sort((a,b) => b.carbon.compareTo(a.carbon));
       case FilterStatus.protein:
         _savedFoodList.sort((a,b) => b.protein.compareTo(a.protein));
-      case FilterStatus.transFat:
-        _savedFoodList.sort((a,b) => b.transFat.compareTo(a.transFat));
+      case FilterStatus.saturatedFat:
+        _savedFoodList.sort((a,b) => b.saturatedFat.compareTo(a.saturatedFat));
     }
   }
 
