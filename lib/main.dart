@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:search_ex/data/db/db.dart';
 import 'package:search_ex/data/data_source/food_api_impl.dart';
@@ -12,6 +13,7 @@ late MySharedPreferences mySharedPreferences;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   mySharedPreferences = await MySharedPreferences.getInstance();
+  await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
 
@@ -20,13 +22,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String? apiKey = dotenv.env['API_KEY'];
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
             create: (_) => HomeViewModel(preferences: mySharedPreferences)),
         ChangeNotifierProvider(
           create: (_) => SearchViewModel(
-            foodRepository: FoodRepositoryImpl(foodApi: FoodApiImpl()),
+            foodRepository: FoodRepositoryImpl(foodApi: FoodApiImpl(apiKey: apiKey!)),
             preferences: mySharedPreferences,
           ),
         ),
