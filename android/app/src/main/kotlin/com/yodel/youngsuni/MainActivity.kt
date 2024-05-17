@@ -1,4 +1,4 @@
-package com.example.search_ex
+package com.yodel.youngsuni
 
 import io.flutter.embedding.android.FlutterActivity
 
