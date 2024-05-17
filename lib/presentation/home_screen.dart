@@ -91,9 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   color: AppColors.white,
                                 ),
                               ),
-                              onDismissed: (direction) {
-                                print('direction ::: $direction');
-
+                              direction: DismissDirection.endToStart,
+                              onDismissed: (direction) async {
+                                final key = viewModel.savedFoodList[index].foodName;
+                                await viewModel.delete(key);
                               },
                               child: ListTile(
                                 title: Text(

@@ -64,6 +64,10 @@ class HomeViewModel with ChangeNotifier {
     }
   }
 
+  Future<void> delete(String key) async {
+    await _preferences.delete(key);
+  }
+
   List<Food> get savedFoodList => _savedFoodList;
 
   HomeScreenStatus get status => _status;

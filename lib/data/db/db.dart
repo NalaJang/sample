@@ -29,4 +29,8 @@ class MySharedPreferences {
   String? getString(String key) {
     return prefs.getString(key);
   }
+
+  Future<bool> delete(String key) async {
+    return await prefs.remove(key);
+  }
 }
