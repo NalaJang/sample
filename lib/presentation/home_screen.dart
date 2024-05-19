@@ -33,8 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Home'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const SearchScreen()),
           );
