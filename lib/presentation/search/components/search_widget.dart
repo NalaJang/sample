@@ -34,18 +34,21 @@ class SearchWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              Text('1회 제공량 ${food.servingsize}g'),
               Row(
                 children: [
                   Text(
-                    '탄수화물 ${food.carbon}',
+                    '탄수화물 ${food.carbon}g',
                     style: const TextStyle(color: AppColors.gray3),
                   ),
+                  const SizedBox(width: 8),
                   Text(
-                    '단백질 ${food.protein}',
+                    '단백질 ${food.protein}g',
                     style: const TextStyle(color: AppColors.gray3),
                   ),
+                  const SizedBox(width: 8),
                   Text(
-                    '지방 ${food.saturatedFat}',
+                    '지방 ${food.saturatedFat}g',
                     style: const TextStyle(color: AppColors.gray3),
                   ),
                 ],
@@ -73,9 +76,11 @@ class SearchWidget extends StatelessWidget {
               // DB 에 저장
               final result = await preferences.setString(key, value);
               if (result) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('저장되었습니다.')),
-                );
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('저장되었습니다.')),
+                  );
+                }
               }
             },
             icon: const Icon(
