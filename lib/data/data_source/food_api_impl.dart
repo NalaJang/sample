@@ -14,7 +14,7 @@ class FoodApiImpl implements FoodApi {
   @override
   Future<List<FoodDto>> getFoodList() async {
     String uri =
-        'https://openapi.foodsafetykorea.go.kr/api/$apiKey/I2790/json/1/50';
+        'https://openapi.foodsafetykorea.go.kr/api/$apiKey/I2790/json/1/300';
     final response = await http.get(Uri.parse(uri));
 
     if (response.statusCode != 200) {
