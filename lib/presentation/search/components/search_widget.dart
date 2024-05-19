@@ -29,15 +29,25 @@ class SearchWidget extends StatelessWidget {
               Text(
                 '${food.foodName}(${food.makerName})',
                 style: const TextStyle(
-                  fontSize: 20.0,
+                  color: AppColors.black,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Row(
                 children: [
-                  Text('탄수화물 ${food.carbon}'),
-                  Text('단백질 ${food.protein}'),
-                  Text('지방 ${food.saturatedFat}'),
+                  Text(
+                    '탄수화물 ${food.carbon}',
+                    style: const TextStyle(color: AppColors.gray3),
+                  ),
+                  Text(
+                    '단백질 ${food.protein}',
+                    style: const TextStyle(color: AppColors.gray3),
+                  ),
+                  Text(
+                    '지방 ${food.saturatedFat}',
+                    style: const TextStyle(color: AppColors.gray3),
+                  ),
                 ],
               ),
             ],
