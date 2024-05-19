@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:search_ex/data/db/db.dart';
 import 'package:search_ex/data/model/food.dart';
+import 'package:search_ex/design/color_style.dart';
 
 class SearchWidget extends StatelessWidget {
   final Food food;
@@ -67,7 +68,10 @@ class SearchWidget extends StatelessWidget {
                 );
               }
             },
-            icon: const Icon(CupertinoIcons.plus_circle_fill),
+            icon: const Icon(
+              CupertinoIcons.plus_circle_fill,
+              color: AppColors.purple2,
+            ),
           ),
         ],
       ),
