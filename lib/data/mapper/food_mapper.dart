@@ -14,7 +14,6 @@ extension FoodMapper on FoodDto {
       sugars: (nutrcont5 == null || nutrcont5!.isEmpty ) ? '0' : nutrcont5!,
       protein: (nutrcont3 == null || nutrcont3!.isEmpty ) ? '0' : nutrcont3!,
       sodium: (nutrcont6 == null || nutrcont6!.isEmpty ) ? '0' : nutrcont6!,
-      fat: (nutrcont4 == null || nutrcont4!.isEmpty ) ? '0' : nutrcont4!,
       saturatedFat: (nutrcont8 == null || nutrcont8!.isEmpty ) ? '0' : nutrcont8!,
       transFat: (nutrcont9 == null || nutrcont9!.isEmpty ) ? '0' : nutrcont9!,
     );

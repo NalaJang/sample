@@ -8,7 +8,6 @@ class Food {
   final String sugars;       // 당류(g)(1회제공량당)
   final String protein;      // 단백질(g)(1회제공량당)
   final String sodium;       // 나트륨(mg)(1회제공량당)
-  final String fat;          // 지방(g)(1회제공량당)
   final String saturatedFat; // 포화지방산(g)(1회제공량당)
   final String transFat;     // 트랜스지방(g)(1회제공량당)
 
@@ -22,7 +21,6 @@ class Food {
     required this.sugars,
     required this.protein,
     required this.sodium,
-    required this.fat,
     required this.saturatedFat,
     required this.transFat,
   });
@@ -38,7 +36,6 @@ class Food {
       'sugars': sugars,
       'protein': protein,
       'sodium': sodium,
-      'fat': fat,
       'saturatedFat': saturatedFat,
       'transFat': transFat,
     };
@@ -55,7 +52,6 @@ class Food {
       sugars: map['sugars'] as String,
       protein: map['protein'] as String,
       sodium: map['sodium'] as String,
-      fat: map['fat'] as String,
       saturatedFat: map['saturatedFat'] as String,
       transFat: map['transFat'] as String,
     );
