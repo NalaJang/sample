@@ -9,13 +9,13 @@ extension FoodMapper on FoodDto {
       makerName: makername ?? '',
       servingsize: servingsize ?? '',
       servingunit: servingunit ?? '104',
-      calories: nutrcont1 ?? '0',
-      carbon: nutrcont2 ?? '0',
-      sugars: nutrcont5 ?? '0',
-      protein: nutrcont3 ?? '0',
-      sodium: nutrcont6 ?? '0',
-      saturatedFat: nutrcont8 ?? '0',
-      transFat: nutrcont9 ?? '0',
+      calories: (nutrcont1 == null || nutrcont1!.isEmpty ) ? '0' : nutrcont1!,
+      carbon: (nutrcont2 == null || nutrcont2!.isEmpty ) ? '0' : nutrcont2!,
+      sugars: (nutrcont5 == null || nutrcont5!.isEmpty ) ? '0' : nutrcont5!,
+      protein: (nutrcont3 == null || nutrcont3!.isEmpty ) ? '0' : nutrcont3!,
+      sodium: (nutrcont6 == null || nutrcont6!.isEmpty ) ? '0' : nutrcont6!,
+      saturatedFat: (nutrcont8 == null || nutrcont8!.isEmpty ) ? '0' : nutrcont8!,
+      transFat: (nutrcont9 == null || nutrcont9!.isEmpty ) ? '0' : nutrcont9!,
     );
   }
 }

@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:search_ex/data/db/db.dart';
 import 'package:search_ex/data/data_source/food_api_impl.dart';
 import 'package:search_ex/data/repository/food_repo_impl.dart';
-import 'package:search_ex/presentation/home_screen.dart';
-import 'package:search_ex/presentation/viewModel/home_view_model.dart';
-import 'package:search_ex/presentation/viewModel/search_view_model.dart';
+import 'package:search_ex/presentation/home/screen/home_screen.dart';
+import 'package:search_ex/presentation/home/view_model/home_view_model.dart';
+import 'package:search_ex/presentation/search/view_model/search_view_model.dart';
 
 late MySharedPreferences mySharedPreferences;
 

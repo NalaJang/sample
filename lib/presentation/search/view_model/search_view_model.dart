@@ -15,19 +15,11 @@ class SearchViewModel with ChangeNotifier {
   })  : _foodRepository = foodRepository,
         _preferences = preferences;
 
-  FoodRepository get foodRepository => _foodRepository;
-
-  MySharedPreferences get preferences => _preferences;
-
-  List<Food> get foodList => List.unmodifiable(_foodList);
-
-  List<Food> get filteredFoodList => List.unmodifiable(_filteredFoodList);
-
   Future<void> _setAllFoodList() async {
     _foodList = await _foodRepository.getFoodList();
   }
 
-  void onSearchFood(String name) async {
+  Future<void> onSearchFood(String name) async {
     if (name == '') {
       return;
     }
@@ -45,5 +37,11 @@ class SearchViewModel with ChangeNotifier {
     _filteredFoodList.clear();
   }
 
-  void resultList() {}
+  FoodRepository get foodRepository => _foodRepository;
+
+  MySharedPreferences get preferences => _preferences;
+
+  List<Food> get foodList => List.unmodifiable(_foodList);
+
+  List<Food> get filteredFoodList => List.unmodifiable(_filteredFoodList);
 }

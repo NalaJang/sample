@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:search_ex/data/db/db.dart';
 import 'package:search_ex/data/model/food.dart';
+import 'package:search_ex/design/color_style.dart';
 
 class SearchWidget extends StatelessWidget {
   final Food food;
@@ -18,7 +19,7 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(12.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -28,15 +29,28 @@ class SearchWidget extends StatelessWidget {
               Text(
                 '${food.foodName}(${food.makerName})',
                 style: const TextStyle(
-                  fontSize: 20.0,
+                  color: AppColors.black,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              Text('1회 제공량 ${food.servingsize}g'),
               Row(
                 children: [
-                  Text('탄수화물 ${food.carbon}'),
-                  Text('단백질 ${food.protein}'),
-                  Text('지방 ${food.saturatedFat}'),
+                  Text(
+                    '탄수화물 ${food.carbon}g',
+                    style: const TextStyle(color: AppColors.gray3),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    '단백질 ${food.protein}g',
+                    style: const TextStyle(color: AppColors.gray3),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    '지방 ${food.saturatedFat}g',
+                    style: const TextStyle(color: AppColors.gray3),
+                  ),
                 ],
               ),
             ],
@@ -62,12 +76,17 @@ class SearchWidget extends StatelessWidget {
               // DB 에 저장
               final result = await preferences.setString(key, value);
               if (result) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('저장되었습니다.')),
-                );
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('저장되었습니다.')),
+                  );
+                }
               }
             },
-            icon: const Icon(CupertinoIcons.plus_circle_fill),
+            icon: const Icon(
+              CupertinoIcons.plus_circle_fill,
+              color: AppColors.purple2,
+            ),
           ),
         ],
       ),
