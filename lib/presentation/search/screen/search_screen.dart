@@ -43,7 +43,14 @@ class _SearchScreenState extends State<SearchScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                viewModel.onSearchFood(_searchTextController.text);
+                if (_searchTextController.text.isEmpty) {
+                  showToast();
+                  return;
+                }
+
+                viewModel.onSearchFoodByName(
+                  searchTerm: _searchTextController.text,
+                );
               },
               icon: const Icon(Icons.search),
             ),
@@ -70,6 +77,12 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void showToast() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('검색어를 입력하세요')),
     );
   }
 }

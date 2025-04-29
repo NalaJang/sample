@@ -11,8 +11,16 @@ class FoodRepositoryImpl implements FoodRepository {
   }) : _foodApi = foodApi;
 
   @override
-  Future<List<Food>> getFoodList() async {
+  Future<List<Food>> getAllFoodList() async {
     final dtoData = await _foodApi.getAllFoodList();
+    final result = dtoData.map((e) => e.toFood()).toList();
+
+    return result;
+  }
+
+  @override
+  Future<List<Food>> getFoodListByName({required String searchTerm}) async {
+    final dtoData = await _foodApi.getFoodListByName(searchTerm: searchTerm);
     final result = dtoData.map((e) => e.toFood()).toList();
 
     return result;

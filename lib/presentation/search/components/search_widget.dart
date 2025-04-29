@@ -27,14 +27,17 @@ class SearchWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${food.foodName}(${food.makerName})',
+                food.foodName,
                 style: const TextStyle(
                   color: AppColors.black,
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text('1회 제공량 ${food.servingsize}g'),
+              food.makerName.isEmpty
+                  ? const SizedBox()
+                  : Text('제조사명 ${food.makerName}'),
+              Text('1회 제공량 ${food.servingsize}'),
               Row(
                 children: [
                   Text(
