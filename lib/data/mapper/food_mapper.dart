@@ -1,29 +1,28 @@
-import 'package:search_ex/data/dto/food_dto.dart';
+import 'package:search_ex/data/dto/food_dto_new.dart';
 import 'package:search_ex/data/model/food.dart';
-import 'package:search_ex/data/model/service_id.dart';
+import 'package:search_ex/data/model/total_count_model.dart';
 
 extension FoodMapper on FoodDto {
   Food toFood() {
     return Food(
-      foodName: desckor ?? '',
-      makerName: makername ?? '',
+      foodName: foodnmkr ?? '',
+      makerName: makernm ?? '',
       servingsize: servingsize ?? '',
-      servingunit: servingunit ?? '104',
-      calories: (nutrcont1 == null || nutrcont1!.isEmpty ) ? '0' : nutrcont1!,
-      carbon: (nutrcont2 == null || nutrcont2!.isEmpty ) ? '0' : nutrcont2!,
-      sugars: (nutrcont5 == null || nutrcont5!.isEmpty ) ? '0' : nutrcont5!,
-      protein: (nutrcont3 == null || nutrcont3!.isEmpty ) ? '0' : nutrcont3!,
-      sodium: (nutrcont6 == null || nutrcont6!.isEmpty ) ? '0' : nutrcont6!,
-      saturatedFat: (nutrcont8 == null || nutrcont8!.isEmpty ) ? '0' : nutrcont8!,
-      transFat: (nutrcont9 == null || nutrcont9!.isEmpty ) ? '0' : nutrcont9!,
+      calories: (amtnum1 == null || amtnum1!.isEmpty) ? '0' : amtnum1!,
+      carbon: (amtnum6 == null || amtnum6!.isEmpty) ? '0' : amtnum6!,
+      sugars: (amtnum7 == null || amtnum7!.isEmpty) ? '0' : amtnum7!,
+      protein: (amtnum3 == null || amtnum3!.isEmpty) ? '0' : amtnum3!,
+      sodium: (amtnum13 == null || amtnum13!.isEmpty) ? '0' : amtnum13!,
+      saturatedFat: (amtnum24 == null || amtnum24!.isEmpty) ? '0' : amtnum24!,
+      transFat: (amtnum25 == null || amtnum25!.isEmpty) ? '0' : amtnum25!,
     );
   }
 }
 
-extension ServiceIdMapper on ServiceIdDto {
-  ServiceId toServiceId() {
-    return ServiceId(
-      row: row?.map((e) => e.toFood()).toList() ?? [],
+extension BodyMapper on Body {
+  TotalCountModel toServiceId() {
+    return TotalCountModel(
+      totalCount: totalCount?.toInt() ?? 0,
     );
   }
 }
