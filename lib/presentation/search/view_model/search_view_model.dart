@@ -15,20 +15,17 @@ class SearchViewModel with ChangeNotifier {
   })  : _foodRepository = foodRepository,
         _preferences = preferences;
 
-  Future<void> _setAllFoodList() async {
-    _foodList = await _foodRepository.getFoodList();
+  Future<void> _setFoodListByName({required String searchTerm}) async {
+    _foodList = await _foodRepository.getFoodListByName(searchTerm: searchTerm);
   }
 
-  Future<void> onSearchFood(String name) async {
-    if (name == '') {
+  Future<void> onSearchFoodByName({required String searchTerm}) async {
+    if (searchTerm == '') {
       return;
     }
-    await _setAllFoodList();
+    await _setFoodListByName(searchTerm: searchTerm);
 
-    _filteredFoodList = _foodList.where((e) {
-      return e.foodName.toLowerCase().contains(name.toLowerCase()) ||
-          e.makerName.toLowerCase().contains(name.toLowerCase());
-    }).toList();
+    _filteredFoodList = _foodList;
 
     notifyListeners();
   }

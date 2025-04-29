@@ -33,28 +33,22 @@ class FoodApiImpl implements FoodApi {
   }
 
   @override
-  Future<List<FoodDto>> getFoodListByName({required String foodName}) async {
-    return [];
+  Future<List<FoodDto>> getFoodListByName({required String searchTerm}) async {
+    String uri =
+        '$baseUrl/getFoodNtrCpntDbInq02?serviceKey=$serviceKey&type=json&FOOD_NM_KR=$searchTerm';
+
+    final response = await http.get(Uri.parse(uri));
+
+    if (response.statusCode != 200) {
+      return throw Exception(
+          'Request failed with status: ${response.statusCode}.');
+    }
+
+    final jsonData = await jsonDecode(response.body) as Map<String, dynamic>;
+    final items = jsonData['body']['items'] as List;
+    final List<FoodDto> foodList =
+        items.map((e) => FoodDto.fromJson(e)).toList();
+
+    return foodList;
   }
-
-  // @override
-  // Future<List<FoodDto>> getFoodList() async {
-  //   String baseUrl = 'https://apis.data.go.kr/1471000/FoodNtrCpntDbInfo02';
-
-  //   String uri =
-  //       'https://openapi.foodsafetykorea.go.kr/api/$apiKey/I2790/json/1/300';
-  //   final response = await http.get(Uri.parse(uri));
-
-  //   if (response.statusCode != 200) {
-  //     return throw Exception(
-  //         'Request failed with status: ${response.statusCode}.');
-  //   }
-
-  //   final jsonData = await jsonDecode(response.body) as Map<String, dynamic>;
-  //   final wholeData = jsonData['I2790'] as Map<String, dynamic>;
-  //   final rowData = wholeData['row'] as List;
-  //   final result = rowData.map((e) => FoodDto.fromJson(e)).toList();
-
-  //   return result;
-  // }
 }
