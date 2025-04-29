@@ -12,7 +12,7 @@ class FoodRepositoryImpl implements FoodRepository {
 
   @override
   Future<List<Food>> getFoodList() async {
-    final dtoData = await _foodApi.getFoodList();
+    final dtoData = await _foodApi.getAllFoodList();
     final result = dtoData.map((e) => e.toFood()).toList();
 
     return result;

@@ -61,7 +61,6 @@ class SearchWidget extends StatelessWidget {
                 foodName: food.foodName,
                 makerName: food.makerName,
                 servingsize: food.servingsize,
-                servingunit: food.servingunit,
                 calories: food.calories,
                 carbon: food.carbon,
                 sugars: food.sugars,

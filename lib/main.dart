@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? apiKey = dotenv.env['API_KEY'];
+    String? serviceKey = dotenv.env['SERVICE_KEY'];
 
     return MultiProvider(
       providers: [
@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
             create: (_) => HomeViewModel(preferences: mySharedPreferences)),
         ChangeNotifierProvider(
           create: (_) => SearchViewModel(
-            foodRepository: FoodRepositoryImpl(foodApi: FoodApiImpl(apiKey: apiKey!)),
+            foodRepository: FoodRepositoryImpl(
+                foodApi: FoodApiImpl(serviceKey: serviceKey!)),
             preferences: mySharedPreferences,
           ),
         ),
